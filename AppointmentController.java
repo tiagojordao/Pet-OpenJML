@@ -15,7 +15,7 @@ public class AppointmentController {
 	
 	
 	/*@ 
-	@ 	requires app instanceof Appointment;
+	@	requires  app instanceof Appointment;
 	@	requires (\forall int i; 0 <= i < appointments.size(); appointments.get(i).getId() != app.getId());
 	@	ensures appointments.size() == \old(appointments.size())+1;
 	@*/ 
