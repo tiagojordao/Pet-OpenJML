@@ -1,4 +1,7 @@
-
+import controllers.AppointmentController;
+import models.Appointment;
+import models.Pet;
+import models.Vet;
 
 public class PetClinic {
 	public static void main(String[] args) {
