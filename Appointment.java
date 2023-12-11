@@ -15,6 +15,7 @@ public class Appointment {
 
     
     /*@
+	@		public normal_behavior
     @		requires n_id >= 0;
     @		requires n_status == "agendado";
     @		requires n_dia != "";

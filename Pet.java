@@ -13,6 +13,7 @@ public class Pet {
 	
 	
 	/*@
+	@		public normal_behavior
     @		requires n_id >= 0;
     @		requires n_name != "";
     @		requires n_birthday != "";

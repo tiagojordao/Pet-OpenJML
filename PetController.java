@@ -4,19 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PetController {
-	private List<Pet> pets;
+
+	//@ spec_public
+	private /*@ non_null @*/ List<Pet> pets;
 	
+	//@ public initially pets.size() == 0;
+
+	/*@ 
+	@	ensures pets != null;
+	@*/
 	public PetController() {
 		this.pets = new ArrayList<>();
 	}
 
 	/*@
-	@	requires id != null;
+	@	requires id >= 0;
 	@	requires name != null;
 	@	requires birthday != null;
 	@	requires owner != null;
 	@	requires (\forall int i; 0 <= i < pets.size(); pets.get(i).getId() != id);
 	@	ensures pets.size() == \old(pets.size())+1;
+	@	ensures (\forall int i; 0 <= 0 < pets.size(); pets.get(i) instanceof Pet);
 	@*/
 	public void addPet(int id, String name, String birthday, String owner) {
 		Pet p = new Pet(id, name, birthday, owner);
