@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VetController {
-	private List<Vet> vets;
+	//@ public initially vets.size() == 0;
+
+	/*@ spec_public @*/
+	private /*@ non_null @*/ List<Vet> vets;
 	
 	public VetController() {
 		this.vets = new ArrayList<>();
@@ -18,8 +21,8 @@ public class VetController {
 	}
 	
 	/*@
-	@	requires id != null;
-	@	requires name != null;
+	@	requires id >= 0;
+	@	requires name != "" && name != null;
 	@	requires email != null;
 	@	requires registro != null;
 	@	requires (\forall int i; 0 <= i < vets.size(); vets.get(i).getId() != id);
@@ -30,7 +33,7 @@ public class VetController {
 		vets.add(v);
 	}
 	
-	public /*@ pure @*/ Vet getVetByName(/*@ non_null @*/String name) {
+	public /*@ nullable @*/ Vet getVetByName(/*@ non_null @*/String name) {
 		for(Vet v : vets) {
 			if(v.getName().equalsIgnoreCase(name)) {
 				return v;

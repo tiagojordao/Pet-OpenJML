@@ -11,6 +11,7 @@ public class Vet {
 	    private /*@ non_null @*/ String registro;
 	    
 	    /*@
+		@		public normal_behavior
 	    @		requires n_id >= 0;
 	    @		requires n_name != "";
 	    @		requires n_email != "";
