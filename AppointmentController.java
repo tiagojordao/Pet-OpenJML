@@ -13,9 +13,10 @@ public class AppointmentController {
 		appointments = new ArrayList<>();
 	}
 	
+
 	/*@ 
 	@ 	requires app != null && app instanceof Appointment;
-	@	ensures (\forall int i; i >= 0 && i < appointments.size(); appointments.get(i) instanceof Appointment);
+	@	requires (\forall int i; 0 <= i < appointments.size(); appointments.get(i).getId() != app.getId());
 	@	ensures appointments.size() == \old(appointments.size())+1;
 	@*/ 
 	public void addAppointment(Appointment app) {
