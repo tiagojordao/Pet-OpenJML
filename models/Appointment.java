@@ -1,27 +1,30 @@
+package models;
 
 
 public class Appointment {
 
-	//@ spec_public
-    private /*@ non_null */ int id;
-	//@ spec_public
-    private /*@ non_null */ String status;
-	//@ spec_public
-    private /*@ non_null */ String dia;
-	//@ spec_public
-    private /*@ non_null */ Pet pet;
-	//@ spec_public
-    private /*@ non_null */ Vet vet;
+    private /*@ spec_public */ int id;
+    private /*@ spec_public */ String status;
+    private /*@ spec_public */ String dia;
+    private /*@ spec_public */ Pet pet;
+    private /*@ spec_public */ Vet vet;
 
     
     /*@
 	@		public normal_behavior
     @		requires n_id >= 0;
+	@		requires n_id < Integer.MAX_VALUE;
     @		requires n_status == "agendado";
+	@		requires n_status != null;
     @		requires n_dia != "";
+	@		requires n_dia != null;
+	@		requires n_pet != null;
+	@		requires n_vet != null;
     @		ensures id == n_id;
     @		ensures status == n_status;
     @		ensures dia == n_dia;
+	@		ensures pet.equals(n_pet);
+	@		ensures vet.equals(n_vet);
     @*/
     public Appointment(int n_id, String n_status, String n_dia, Pet n_pet, Vet n_vet) {
     	this.id = n_id;

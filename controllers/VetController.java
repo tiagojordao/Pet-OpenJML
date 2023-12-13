@@ -1,7 +1,10 @@
+package controllers;
 
 
 import java.util.ArrayList;
 import java.util.List;
+
+import models.Vet;
 
 public class VetController {
 	//@ public initially vets.size() == 0;
@@ -21,15 +24,11 @@ public class VetController {
 	}
 	
 	/*@
-	@	requires id >= 0;
-	@	requires name != "" && name != null;
-	@	requires email != null;
-	@	requires registro != null;
-	@	requires (\forall int i; 0 <= i < vets.size(); vets.get(i).getId() != id);
+	@	requires v != null;
+	@	ensures vets.get(vets.size()-1).equals(v);
 	@	ensures vets.size() == \old(vets.size())+1;
 	@*/
-	public void addVet(int id, String name, String email, String registro) {
-		Vet v = new Vet(id, name, email, registro);
+	public void addVet(Vet v) {
 		vets.add(v);
 	}
 	
@@ -42,7 +41,9 @@ public class VetController {
 		return null;
 	}
 	
-	public void deleteVetByName(/*@ non_null @*/String name) {
+	//@		requires name != null;
+	//@		requires (\exists int i; 0 <= i < vets.size(); vets.get(i).getName() != name);
+	public void deleteVetByName(String name) {
 		for(Vet v : vets) {
 			if(v.getName().equalsIgnoreCase(name)) {
 				vets.remove(v);
