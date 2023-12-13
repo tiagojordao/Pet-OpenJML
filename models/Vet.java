@@ -2,6 +2,7 @@ package models;
 
 
 public class Vet {
+
 		//@ spec_public
 	    private /*@ non_null @*/ int id;
 		//@ spec_public
@@ -10,7 +11,7 @@ public class Vet {
 	    private /*@ non_null @*/ String email;
 		//@ spec_public
 	    private /*@ non_null @*/ String registro;
-	    
+
 	    /*@
 		@		public normal_behavior
 	    @		requires n_id >= 0;

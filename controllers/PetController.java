@@ -14,6 +14,7 @@ public class PetController {
 	//@ public initially pets.size() == 0;
 
 	/*@ 
+	@	public normal_behavior
 	@	ensures pets != null;
 	@*/
 	public PetController() {
@@ -21,20 +22,18 @@ public class PetController {
 	}
 
 	/*@
-	@	requires id >= 0;
-	@	requires name != null;
-	@	requires birthday != null;
-	@	requires owner != null;
-	@	requires (\forall int i; 0 <= i < pets.size(); pets.get(i).getId() != id);
-	@	ensures pets.size() == \old(pets.size())+1;
-	@	ensures (\forall int i; 0 <= 0 < pets.size(); pets.get(i) instanceof Pet);
+	@	requires p != null;
+	@	requires p instanceof Pet;
+	@	ensures pets.size() == \old(pets.size()) + 1;
+	@	ensures pets.get(pets.size() - 1).equals(p);
 	@*/
-	public void addPet(int id, String name, String birthday, String owner) {
-		Pet p = new Pet(id, name, birthday, owner);
+	public void addPet(Pet p) {
 		pets.add(p);
 	}
 	
-	public /*@ pure @*/ Pet getPetByName(String petName) {
+	//@ requires petName != null;
+	//@ pure
+	public /*@ nullable @*/ Pet getPetByName(String petName) {
 		for (Pet pet : pets) {
 			if(pet.getName().equalsIgnoreCase(petName)) {
 				return pet;
@@ -43,14 +42,17 @@ public class PetController {
 		return null;
 	}
 	
-	/*@
-	@	requires name != null;
-	@	requires (\forall int i; 0 <= i < pets.size(); pets.get(i).getName() == name);
-	@*/
+			//	ensures (\forall int i; 0 <= i < pets.size(); pets.get(i).getName() != name);
+	//@	requires name != null;
+	//@	requires name != "";
 	public void deletePetByName(String name) {
-		for (Pet pet : pets) {
-			if(pet.getName().equalsIgnoreCase(name)) {
-				pets.remove(pet);
+		// maintaining 0 <= i <= pets.size();
+		// maintaining pets.size() <= \old(pets.size());
+		//@ loop_writes i, pets;
+		//@ decreases pets.size() - i;
+		for(int i = 0 ; i < pets.size() ; i ++) {
+			if(pets.get(i).getName().equalsIgnoreCase(name)) {
+				pets.remove(pets.get(i));
 			}
 		}
 	}
