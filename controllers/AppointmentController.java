@@ -38,7 +38,7 @@ public class AppointmentController {
 	//@ pure
 	public /*@ nullable @*/ Appointment getAppointment(int appId) {
 		//@ maintaining 0 <= i <= appointments.size();
-		//@ maintaining 0 <= k <= i ; appointments.get(k).getId() != appId;
+		//@ maintaining \forall int k; 0 <= k < i; appointments.get(k).getId() != appId;
 		//@ loop_writes i;
 		//@ decreases appointments.size() - i;
 		for(int i = 0 ; i < appointments.size() ; i++) {
